@@ -86,6 +86,20 @@ function saveDados(oTreino) {
     })
 }
 
+function updateDados(oAvaliacao, id) {
+    loadAjax({
+        method: 'PUT',
+        rota: `treinos/${id}`,
+        data: oAvaliacao,
+        success: () => {
+            closeModal('modal_incluir_treino');
+            buscaDados();
+            clearInputs();
+            message('Treino alterado com sucesso', 'success');
+        }
+    })
+}
+
 function loadDataGrid(result) {
     let oTable = $('#grid_treinos tbody');
     oTable.empty();

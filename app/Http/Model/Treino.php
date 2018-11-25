@@ -53,12 +53,24 @@ class Treino extends Model {
     }
 
     public function atualizar($id) {
+        $exercicios = new TreinoExercicio();
+        $exercicios->deleteExerciciosFromTreino($id);
+
+        $aInputs = Input::all();
+
         $treino = self::find($id);
         if(is_null($treino)){
             return false;
         }
-        $treino->fill(Input::all());
+        $treino->fill($aInputs);
         $treino->save();
+
+        foreach($aInputs['exercicios'] as $exercicio) {
+            $exercicio['codigo_treino'] = $treino->original['id'];
+            $oExercicio = new TreinoExercicio($exercicio);
+            $oExercicio->save();
+        }
+
         return $treino;
     }
 

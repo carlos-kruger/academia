@@ -15,4 +15,8 @@ class TreinoExercicio extends Model {
     protected $primaryKey = 'id';
     public $timestamps = true;
 
+    function deleteExerciciosFromTreino($idTreino) {
+        return DB::table('treinos_exercicios')->where('codigo_treino', '=', $idTreino)->delete();
+    }
+
 }
