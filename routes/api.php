@@ -25,11 +25,14 @@ Route::group(['prefix'=>'alunos'], function(){
     Route::put('{id}/alterar-status', 'AlunoController@ativarInativar');
 });
 
-Route::group(['prefix'=>'profissionais'], function(){
-    Route::get('','ProfissionalController@findAll');
-    Route::post('', 'ProfissionalController@save');
-    Route::put('{id}', 'ProfissionalController@atualizar');
-    Route::put('{id}/alterarsenha', 'ProfissionalController@alterarSenha');
+Route::group(['prefix'=>'treinos'], function(){
+    Route::get('','TreinoController@findAll');
+    Route::get('{id}','TreinoController@findById');
+    Route::get('{id}/exercicios','TreinoController@buscaExercicios');
+    Route::put('{id}','TreinoController@atualizar');
+    Route::put('{id}/alterar-status','TreinoController@ativarInativar');
+    Route::post('','TreinoController@save');
+    Route::delete('{id}','TreinoController@delete');
 });
 
 Route::group(['prefix'=>'avaliacoes'], function(){

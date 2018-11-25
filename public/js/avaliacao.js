@@ -97,24 +97,6 @@ function excluirDados(id) {
     }
 }
 
-function buscaCliente(codigoCliente) {
-    if(codigoCliente) {
-        loadAjax({
-            rota: `alunos/${codigoCliente}`,
-            success: (result) => {
-                $('#aluno_nome').val(result.nome)
-            },
-            error: (error) => {
-                $('#aluno, #aluno_nome').val('');
-                catchError(error);
-            }
-        })
-    }
-    else {
-        $('#aluno, #aluno_nome').val('');
-    }
-}
-
 function loadDataGrid(result) {
     let oTable = $('#grid_avaliacoes tbody');
     oTable.empty();

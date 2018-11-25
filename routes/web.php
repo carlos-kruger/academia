@@ -27,6 +27,10 @@ Route::get('/avaliacoes', function() {
     return view('avaliacao');
 })->middleware('auth');
 
+Route::get('/treinos', function() {
+    return view('treino');
+})->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

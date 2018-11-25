@@ -63,8 +63,27 @@ function criaIcone(settings) {
         title: settings.title,
         css: {
             cursor: 'pointer',
-            padding: '5px'
+            padding: '5px',
+            opacity: (!settings.disabled ? '1' : '0.3')
         },
-        click: settings.click
+        click: (!settings.disabled ? settings.click : null)
     })
+}
+
+function buscaCliente(codigoCliente) {
+    if(codigoCliente) {
+        loadAjax({
+            rota: `alunos/${codigoCliente}`,
+            success: (result) => {
+                $('#aluno_nome').val(result.nome)
+            },
+            error: (error) => {
+                $('#aluno, #aluno_nome').val('');
+                catchError(error);
+            }
+        })
+    }
+    else {
+        $('#aluno, #aluno_nome').val('');
+    }
 }
