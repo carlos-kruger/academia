@@ -32,12 +32,17 @@ function closeModal(idModal) {
 }
 
 function catchError(error) {
-    message(error.responseJSON[1], 'warning');
+    if(error.status === 404) {
+        message('Erro ao processar os dados', 'error');
+    }
+    else {
+        message(error.responseJSON[1], 'warning');
+    }
 }
 
 function message(mensagem, tipo) {
     let title = 'Aviso';
-    if(tipo == 'success') {
+    if(tipo === 'success') {
         title = 'Sucesso';
     }
 
@@ -45,8 +50,21 @@ function message(mensagem, tipo) {
         title: title,
         position: 'top right',
         pauseDelayOnHover: true,
+        icon: false,
         continueDelayOnInactiveTab: false,
         sound: false,
         msg: mensagem
     });
+}
+
+function criaIcone(settings) {
+    return $('<i>', {
+        class: `fas fa-${settings.class}`,
+        title: settings.title,
+        css: {
+            cursor: 'pointer',
+            padding: '5px'
+        },
+        click: settings.click
+    })
 }

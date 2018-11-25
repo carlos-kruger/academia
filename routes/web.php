@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('aluno');
+})->middleware('auth');
 
 Route::get('/alunos', function() {
     return view('aluno');

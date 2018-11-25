@@ -20,6 +20,7 @@ class CreateAlunosTable extends Migration
             $table->string('celular');
             $table->date('nascimento');
             $table->integer('sexo');
+            $table->integer('status')->default(1);
             $table->timestamps();
             //$table->foreign('id')->references('id')->on('users');
         });

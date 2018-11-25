@@ -10,7 +10,7 @@ use Sofa\Eloquence\Mappable;
 class Aluno extends Model {
 
     protected $table = 'alunos';
-    protected $fillable = array ('id', 'nome', 'email', 'celular', 'nascimento', 'sexo');
+    protected $fillable = array ('id', 'nome', 'email', 'celular', 'nascimento', 'sexo', 'status');
     protected $primaryKey = 'id';
     public $timestamps = true;
 
@@ -38,6 +38,17 @@ class Aluno extends Model {
             return false;
         }
         $aluno->fill(Input::all());
+        $aluno->save();
+        return $aluno;
+    }
+
+    public function ativarInativar($id) {
+        $inputs = Input::all();
+        $aluno = self::find($id);
+        if(is_null($aluno)){
+            return false;
+        }
+        $aluno->status = $inputs['status'];
         $aluno->save();
         return $aluno;
     }

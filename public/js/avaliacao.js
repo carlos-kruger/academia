@@ -100,7 +100,7 @@ function excluirDados(id) {
 function buscaCliente(codigoCliente) {
     if(codigoCliente) {
         loadAjax({
-            rota: `cliente/${codigoCliente}`,
+            rota: `alunos/${codigoCliente}`,
             success: (result) => {
                 $('#aluno_nome').val(result.nome)
             },
@@ -138,26 +138,20 @@ function loadDataGrid(result) {
                     html: oDado.peso
                 }),
                 $('<td>').append(
-                    $('<i>', {
-                        class: 'fas fa-pencil-alt',
+                    criaIcone({
+                        class: 'pencil-alt',
                         title: 'Alterar',
-                        css: {
-                            cursor: 'pointer'
-                        },
                         click: () => {
                             openModalAlteracao(oDado)
                         }
                     }),
-                    $('<i>', {
-                        class: 'fas fa-trash',
+                    criaIcone({
+                        class: 'trash',
                         title: 'Excluir',
-                        css: {
-                            cursor: 'pointer'
-                        },
                         click: () => {
                             excluirDados(oDado.id)
                         }
-                    })                    
+                    })           
                 ))
     });
 }
@@ -177,5 +171,5 @@ function setDadosModal(oDados) {
 }
 
 function clearInputs() {
-    $('#codigo, #nome, #email, #celular, #nascimento').val('');
+    $('#codigo, #aluno, #aluno_nome, #altura, #peso').val('');
 }

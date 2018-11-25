@@ -17,11 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix'=>'cliente'], function(){
+Route::group(['prefix'=>'alunos'], function(){
     Route::get('','AlunoController@findAll');
     Route::get('{id}','AlunoController@findById');
     Route::post('', 'AlunoController@save');
     Route::put('{id}', 'AlunoController@atualizar');
+    Route::put('{id}/alterar-status', 'AlunoController@ativarInativar');
 });
 
 Route::group(['prefix'=>'profissionais'], function(){

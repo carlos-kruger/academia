@@ -19,8 +19,8 @@
                         <th scope="col">E-mail</th>
                         <th scope="col">Celular</th>
                         <th scope="col">Nascimento</th>
-                        <th scope="col">Criado em</th>
-                        <th scope="col">Última atualização</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -59,7 +59,7 @@
                         </div>                        
                         <div class="form-group">
                             <label for="celular" class="col-form-label">Celular:</label>
-                            <input type="text" class="form-control" id="celular" required>
+                            <input type="text" maxlength="15" class="form-control" id="celular" required>
                             <div class="invalid-feedback">
                                 Celular é obrigatório.
                             </div>                             

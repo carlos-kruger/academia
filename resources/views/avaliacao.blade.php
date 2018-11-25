@@ -61,8 +61,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="altura" class="col-form-label">Altura:</label>
-                                    <input type="text" class="form-control" id="altura" required>
+                                    <label for="altura" class="col-form-label">Altura (cm):</label>
+                                    <input type="text" maxlength="3" class="form-control" id="altura" required> 
                                     <div class="invalid-feedback">
                                         Altura é obrigatório.
                                     </div>                             
@@ -70,9 +70,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="peso" class="col-form-label">Peso:</label>
-                                    <input type="text" class="form-control" id="peso" required>
-                                    <div class="invalid-feedback">
+                                    <label for="peso" class="col-form-label">Peso (kg):</label>
+                                    <input type="text" maxlength="6" class="form-control" id="peso" required>
+                                    <div class="invalid-feedback"> 
                                         Peso é obrigatório.
                                     </div>                             
                                 </div> 

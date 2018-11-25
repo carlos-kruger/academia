@@ -48,4 +48,14 @@ class AlunoController extends BaseController
             ->header("Content-Type","application/json");
     }
 
+    public function ativarInativar($id) {
+        $aluno = $this->aluno->ativarInativar($id);
+        if(!$aluno){
+            return response()->json(['response', 'Aluno não encontrado.'], 400)
+                ->header("Content-Type", "application/json");
+        }
+        return response()->json($aluno, 200)
+            ->header("Content-Type","application/json");
+    }
+
 }

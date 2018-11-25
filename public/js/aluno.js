@@ -41,11 +41,15 @@ function setEvents() {
     $('#btn_fechar').click(() => {
         closeModal('modal_incluir_aluno');
     });
+
+    $('#celular').keypress(function() {
+        $(this).val(mascaraCelular($(this).val()));
+    })
 }
 
 function buscaDados() {
     loadAjax({
-        rota: 'cliente',
+        rota: 'alunos',
         success: (result) => {
             loadDataGrid(result);
         }
@@ -75,40 +79,48 @@ function loadDataGrid(result) {
                     html: oDado.nascimento
                 }),
                 $('<td>', {
-                    html: oDado.created_at
+                    html: (oDado.sexo == 1 ? 'Masculino' : 'Feminino')
                 }),
                 $('<td>', {
-                    html: oDado.updated_at
+                    html: (oDado.status == 1 ? 'Ativo' : 'Inativo')
                 }),
                 $('<td>').append(
-                    $('<i>', {
-                        class: 'fas fa-pencil-alt',
+                    criaIcone({
+                        class: 'pencil-alt',
                         title: 'Alterar',
-                        css: {
-                            cursor: 'pointer'
-                        },
                         click: () => {
                             openModalAlteracao(oDado)
                         }
                     }),
-                    $('<i>', {
-                        class: 'fas fa-pencil-alt',
-                        title: 'Avaliação',
-                        css: {
-                            cursor: 'pointer'
-                        },
+                    criaIcone({
+                        class: (oDado.status == 1 ? 'arrow-down' : 'arrow-up'),
+                        title: (oDado.status == 1 ? 'Inativar' : 'Ativar'),
                         click: () => {
-                            openModalAvaliacao()
+                            ativarInativarAluno(oDado.status, oDado.id)
                         }
-                    })                    
+                    })                                  
                 ))
     });
+}
+
+function ativarInativarAluno(statusAtual, codigoAluno) {
+    if(confirm(`Confirma ${statusAtual == 1 ? 'inativar' : 'ativar'} este aluno?`)) {
+        loadAjax({
+            method: 'PUT',
+            rota: `alunos/${codigoAluno}/alterar-status`,
+            data: {status: (statusAtual == 1 ? 2 : 1)},
+            success: () => {
+                buscaDados();
+                message(`Aluno ${statusAtual == 1 ? 'inativado' : 'ativado'} com sucesso`, 'success');
+            }
+        })
+    }
 }
 
 function saveDados(oCliente) {
     loadAjax({
         method: 'POST',
-        rota: 'cliente',
+        rota: 'alunos',
         data: oCliente,
         success: () => {
             clearInputs();
@@ -122,7 +134,7 @@ function saveDados(oCliente) {
 function updateDados(oCliente, id) {
     loadAjax({
         method: 'PUT',
-        rota: `cliente/${id}`,
+        rota: `alunos/${id}`,
         data: oCliente,
         success: () => {
             closeModal('modal_incluir_aluno');
@@ -155,4 +167,10 @@ function setDadosModal(oDados) {
 function clearInputs() {
     $('#codigo, #nome, #email, #celular, #nascimento').val('');
     $('#sexo').val('1');
+}
+
+function mascaraCelular(valor) {
+    return valor.replace( /[^\d]/g, '' )
+                .replace( /^(\d\d)(\d)/, '($1) $2' )
+                .replace( /(\d{5})(\d)/, '$1-$2' )
 }

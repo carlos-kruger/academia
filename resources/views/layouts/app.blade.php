@@ -16,6 +16,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="lobibox/dist/css/Lobibox.min.css"/>
 
     <!-- Styles -->
@@ -27,7 +28,7 @@
     <script src="lobibox/dist/js/Lobibox.min.js"></script>
     <script src="lobibox/dist/js/notifications.min.js"></script>
     <script>
-        const __codigoUsuarioLogado = {{ Auth::user() ? Auth::user()->id : '' }}
+        const __codigoUsuarioLogado = '{{ Auth::user() ? Auth::user()->id : '' }}';
     </script>
     <script src="js/utils.js"></script>
 </head>
@@ -35,7 +36,7 @@
     <div id="app">
         @if (Auth::user())
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-                <div class="container">
+                <div class="container">            
                     <a class="navbar-brand" href="{{ url('/alunos') }}">
                         Alunos
                     </a>
@@ -46,7 +47,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">                   
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
 
@@ -55,6 +56,13 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
+                            <li>
+                                <a class="" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -71,7 +79,7 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                            </li>                      
                         </ul>
                     </div>
                 </div>
